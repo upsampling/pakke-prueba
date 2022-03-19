@@ -1,0 +1,11 @@
+{
+  "type": ["object", "null"],
+    "properties": { 
+      "hola": {
+        "type": "object",
+          "required": ["prueba", "noa"]
+      }
+    },
+    "required": ["name", "lastName", "hola"]
+} 
+  

@@ -6,11 +6,13 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 
+const { bodyValidate } = require('./commons/utils/bodyValidate');
 const router = require('./routers');
 const app = express();
 
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(express.json(bodyValidate));
+app.use(morgan('combined'));
 app.use(router);
 
 app.listen(PORT, () => {
