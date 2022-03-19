@@ -13,4 +13,8 @@ router.get('/alive', (req, res) => {
 router.use('/image', MiddlewareAuth, imageRouter);
 router.use('/object', objectRouter);
 
+router.use('*', function (req, res) {
+  res.status(404).send('DOES N0T EXIST THIS URL');
+})
+
 module.exports = router;

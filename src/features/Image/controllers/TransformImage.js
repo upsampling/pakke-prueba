@@ -1,9 +1,10 @@
 const axios = require('axios');
+var fs = require('fs');
 const { validate } = require('jsonschema');
 
 const imageSchema = require('../validators/imageSchema.json');
 
-function TransformImage (req, res){
+async function TransformImage (req, res){
     const bodyAttributes = req.body;
 
     if(Object.entries(bodyAttributes).length === 0){
@@ -16,12 +17,15 @@ function TransformImage (req, res){
         return res.status(400).send({"message": errors.map(item => { return item.message;})})
     }
 
-    // axios.get('http://webcode.me').then(resp => {
-    //     console.log(resp.data);
-    // });
-    
-    console.log('bodyAttributes: ', bodyAttributes.link);
-    return res.status(201).send('todo ok');
+    let imageBase64;
+    try {
+        const response = await axios.get(bodyAttributes.link, { responseType: 'arraybuffer' });
+        imageBase64 = Buffer.from(response.data, 'binary').toString('base64')        
+    } catch (error) {
+        return res.status(404).send('URL INVALID');
+    }
+
+    return res.status(201).send({ "base64": imageBase64});
 
 }
 
