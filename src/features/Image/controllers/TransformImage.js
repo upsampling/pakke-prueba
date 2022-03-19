@@ -1,8 +1,9 @@
+const axios = require('axios');
 const { validate } = require('jsonschema');
 
 const imageSchema = require('../validators/imageSchema.json');
 
-async function TransformImage (req, res){
+function TransformImage (req, res){
     const bodyAttributes = req.body;
 
     if(Object.entries(bodyAttributes).length === 0){
@@ -15,7 +16,11 @@ async function TransformImage (req, res){
         return res.status(400).send({"message": errors.map(item => { return item.message;})})
     }
 
-    console.log('hola');
+    // axios.get('http://webcode.me').then(resp => {
+    //     console.log(resp.data);
+    // });
+    
+    console.log('bodyAttributes: ', bodyAttributes.link);
     return res.status(201).send('todo ok');
 
 }

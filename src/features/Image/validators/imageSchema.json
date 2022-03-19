@@ -3,9 +3,10 @@
     "properties": {
       "link": { 
         "type": "string",
-      	"pattern": "^(http|https)://$"
+      	"pattern": "^https?:\/\/(.*)$"
         
       }
     },
    "required": ["link"]
-} 
+
+}
