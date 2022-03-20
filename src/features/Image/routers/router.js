@@ -6,4 +6,3 @@ const { TransformImage } = require('../controllers/TransformImage');
 router.post('/transform', TransformImage);
 
 module.exports = router;
-
